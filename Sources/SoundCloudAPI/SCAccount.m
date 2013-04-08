@@ -42,10 +42,14 @@ NSString * const SCAccountDidFailToGetAccessToken = @"SCAccountDidFailToGetAcces
 }
 
 #pragma mark Accessors
-
+    
 - (NSString *)identifier;
 {
     return self.oauthAccount.identifier;
+}
+
+- (NSString*)oauthAccessToken {
+    return [[oauthAccount accessToken] accessToken];
 }
 
 @end

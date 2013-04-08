@@ -1,5 +1,5 @@
 /*
- * Copyright 2010, 2011 nxtbgthng for SoundCloud Ltd.
+ * Copyright 2010, 2011 ; for SoundCloud Ltd.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -34,5 +34,8 @@ extern NSString * const SCAccountDidFailToGetAccessToken;
 #pragma mark Accessors
 
 @property (nonatomic, readonly) NSString *identifier;
+
+
+- (NSString*)oauthAccessToken;
 
 @end
