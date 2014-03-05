@@ -18,38 +18,44 @@
  * 
  */
 
-#if TARGET_OS_IPHONE
-#import <OAuth2Client/NXOAuth2.h>
-#else
-#import <OAuth2Client/NXOAuth2.h>
-#endif
-
-#import "SCAccount+Private.h"
-#import "SCAccount.h"
+#import <Foundation/Foundation.h>
 
 #pragma mark Notifications
 
-NSString * const SCAccountDidFailToGetAccessToken = @"SCAccountDidFailToGetAccessToken";
+extern NSString * const SCSoundCloudAccountDidChangeNotification;
+extern NSString * const SCSoundCloudDidFailToRequestAccessNotification;
+
+
+#pragma mark Handler
+
+typedef void(^SCPreparedAuthorizationURLHandler)(NSURL *preparedURL);
+
 
 #pragma mark -
 
-@implementation SCAccount
+@class SCAccount;
 
-- (void)dealloc;
-{
-    [oauthAccount release];
-    [super dealloc];
-}
+@interface SCSoundCloud : NSObject
 
 #pragma mark Accessors
-    
-- (NSString *)identifier;
-{
-    return self.oauthAccount.identifier;
-}
 
-- (NSString*)oauthAccessToken {
-    return [[oauthAccount accessToken] accessToken];
-}
++ (SCAccount *)account;
+
+
+#pragma mark Manage Accounts
+
++ (void)requestAccessWithPreparedAuthorizationURLHandler:(SCPreparedAuthorizationURLHandler)aPreparedAuthorizationURLHandler;
++ (void)removeAccess;
+
+
+#pragma mark Configuration
+
++ (void)setClientID:(NSString *)aClientID
+             secret:(NSString *)aSecret
+        redirectURL:(NSURL *)aRedirectURL;
+
+#pragma mark OAuth2 Flow
+
++ (BOOL)handleRedirectURL:(NSURL *)URL;
 
 @end

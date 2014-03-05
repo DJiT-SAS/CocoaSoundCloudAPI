@@ -1,5 +1,5 @@
 /*
- * Copyright 2010, 2011 nxtbgthng for SoundCloud Ltd.
+ * Copyright 2010, 2011 ; for SoundCloud Ltd.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -18,38 +18,24 @@
  * 
  */
 
-#if TARGET_OS_IPHONE
-#import <OAuth2Client/NXOAuth2.h>
-#else
-#import <OAuth2Client/NXOAuth2.h>
-#endif
-
-#import "SCAccount+Private.h"
-#import "SCAccount.h"
+#import <Foundation/Foundation.h>
 
 #pragma mark Notifications
 
-NSString * const SCAccountDidFailToGetAccessToken = @"SCAccountDidFailToGetAccessToken";
+extern NSString * const SCAccountDidFailToGetAccessToken;
 
-#pragma mark -
+@class NXOAuth2Account;
 
-@implementation SCAccount
-
-- (void)dealloc;
-{
-    [oauthAccount release];
-    [super dealloc];
+@interface SCAccount : NSObject {
+@private
+    NXOAuth2Account *oauthAccount;
 }
 
 #pragma mark Accessors
-    
-- (NSString *)identifier;
-{
-    return self.oauthAccount.identifier;
-}
 
-- (NSString*)oauthAccessToken {
-    return [[oauthAccount accessToken] accessToken];
-}
+@property (nonatomic, readonly) NSString *identifier;
+
+
+- (NSString*)oauthAccessToken;
 
 @end

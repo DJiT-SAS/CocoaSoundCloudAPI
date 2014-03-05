@@ -19,7 +19,7 @@
  */
 
 #if TARGET_OS_IPHONE
-#import "NXOAuth2.h"
+#import <OAuth2Client/NXOAuth2.h>
 #else
 #import <OAuth2Client/NXOAuth2.h>
 #endif
